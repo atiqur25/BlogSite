@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} welcome to your sample {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+<style>
+    .row h3 a{
+    color: #151513;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: system-ui;
+    letter-spacing: 0.1rem;
+    padding-bottom: 5px;
+    text-transform: capitalize;
+    text-align: justify;
+
+      }
+.row h3 a:hover{
+    color: green;
+}
+
+
+.row h4 a{
+   color: #333331;
+    font-size: 15px;
+    letter-spacing: 0.1rem;
+    text-align: justify;
+    text-transform: capitalize;
+    }
+.row h4 a:hover{
+    color: green;
+
+}
+
+.row button a{
+color:black;
+}
+.thumbnail a{
+    color: black;
+    margin-top: 20px;
+    margin-bottom: none;
+    padding-bottom: 0px;
+    text-transform: capitalize;}
+
+.thumbnail a:hover{
+    color: green;
+
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+    background: #18e86b !important;
+    border-color: #0df194 !important;
+}
+#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
+    width: 400px;
+    padding: 10px;
+}
+
+
+.thumbnail > img, .thumbnail a > img:hover {
+ opacity: 0.5;
+   transform: scaleX(-1);
+
+ }
+</style>
+{% endblock %}
+
+
+
+{% block profile %}
+<a href="#" class="fh5co-close-offcanvas js-fh5co-close-offcanvas"><span><i class="icon-cross3"></i> <span>Close</span></span></a>
+				<div class="fh5co-bio">
+			<figure>
+				<img src="{{ auth.profile_picture.url }}" alt="Free HTML5 Bootstrap Template" class="img-responsive">
+			</figure>
+			<h3 class="heading">About Me (author )</h3>
+			<h2>{{ auth.name}} </h2>
+			<p> {{ auth.details}}</p>
+			<ul class="fh5co-social">
+				<li><a href="#"><i class="icon-twitter"></i></a></li>
+				<li><a href="#"><i class="icon-facebook"></i></a></li>
+				<li><a href="#"><i class="icon-instagram"></i></a></li>
+			</ul>
+		</div>
+{% endblock %}
+
+
+
+{% block content %}
+	<div class="container">
+		      <h1> Author : {{auth.name}} </h1>
+
+		    <div class="row">
+       {% for p in post %}
+				<div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+            <a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" style="width:329px; height:270px;" alt="Image" class="img-responsive"></a>
+                  <div class="caption">
+                      <span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> category : {{p.category.name}} </a></span>
+				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title }}</a></h3>
+					  <span class="fh5co-meta fh5co-date"> {{ p.time_posted }} </span>
+                        <button class="btn btn-success"> <a href="{% url 'single_page' id=p.id %}"  role="button">Viwe</a></button>
+                  </div>
+                </div>
+              </div>
+<!--	     <article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">-->
+<!--				<figure>-->
+<!--					<a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" alt="Image" class="img-responsive"></a>-->
+<!--				</figure>-->
+<!--				<span class="fh5co-meta"><a href="{% url 'single_page' id=p.id %}"> {{ p.category }} </a></span>-->
+<!--				<h2 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}"> {{p.title}} </a></h2>-->
+<!--				<span class="fh5co-meta fh5co-date"> {{ p.time_posted }} </span>-->
+<!--			</article>-->
+       {% endfor %}
+			</div>
+
+ <div class="container-fluid">
+
+	 <div class="pagination">
+    <span class="step-links">
+        {% if post.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ post.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ post.number }} of {{ post.paginator.num_pages }}.
+        </span>
+
+        {% if post.has_next %}
+            <a href="?page={{ post.next_page_number }}">next</a>
+            <a href="?page={{ post.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer%}
+
+
+{% block script %}
+
+{% endblock %}
+

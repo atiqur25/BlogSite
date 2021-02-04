@@ -1,0 +1,185 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Home page  {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+	<style type="text/css">
+		#fh5co-offcanvas {
+    width: auto;
+}
+
+.row h3 a{
+    color: #151513;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: system-ui;
+    letter-spacing: 0.1rem;
+    padding-bottom: 5px;
+    text-transform: capitalize;
+    text-align: justify;
+    text-decoration: none;
+
+
+      }
+.row h3 a:hover{
+    color: green;
+}
+
+
+.row h4 a{
+   color: #333331;
+    font-size: 15px;
+    letter-spacing: 0.1rem;
+    text-align: justify;
+    text-transform: capitalize;
+    text-decoration: none;
+
+    }
+.row h4 a:hover{
+    color: green;
+
+}
+
+.row button a{
+color:black;
+text-decoration: none;
+
+}
+.thumbnail a{
+    color: black;
+    margin-top: 18px;
+    margin-bottom: none;
+    padding-bottom: 0px;
+    text-transform: capitalize;
+    text-decoration: none;
+
+    }
+
+.thumbnail a:hover{
+    color: green;
+
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+    background: #18e86b !important;
+    border-color: #0df194 !important;
+}
+#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
+    width: 400px;
+    padding: 10px;
+}
+
+
+.thumbnail > img, .thumbnail a > img:hover {
+ opacity: 0.5;
+   transform: scaleX(-1);
+
+ }
+	</style>
+{% endblock %}
+
+{% block profile %}
+{% endblock %}
+
+{% block content %}
+   <div class="container">
+           <div class="row">
+               {% for p in article_post %}
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                <a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" style="width:329px; height:250px;" alt="Image" class="img-responsive"></a>
+                  <div class="caption">
+                      <span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> category : {{p.category.name}} </a></span>
+				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title|truncatewords:1 }}... More</a></h3>
+                      <h4  class="card-subtitle mb-2 text-muted"><a href="{% url 'author' name=p.article_author.name.username %}"> Author: {{ p.article_author.name }} </a> </h4>
+                    <div>
+                        <button class="btn btn-success"> <a href="{% url 'single_page' id=p.id %}"  role="button">Viwe</a></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+<!--				<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">-->
+<!--						<figure>-->
+<!--							<a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" style="width:290px; height:320px;" alt="Image" class="img-responsive"></a>-->
+<!--						</figure>-->
+<!--						<span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> {{p.category.name}} </a></span>-->
+<!--						<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title }}</a></h3>-->
+<!--				   <h6  class="card-subtitle mb-2 text-muted"><a href="{% url 'author' name=p.article_author.name.username %}"> Author: {{ p.article_author.name }} </a> </h6>-->
+<!--						<span class="fh5co-meta fh5co-date">{{ p.time_posted }}</span>-->
+<!--			   </article>-->
+<!--			  <div class="clearfix visible-xs-block"></div>-->
+		{% endfor %}
+                  </div>
+       </div>
+
+
+ <div class="container">
+     <nav>
+      <ul class="pagination">
+          {% if article_post.has_other_pages %}
+          <ul class="pagination">
+            {% if article_post.has_previous %}
+              <li><a href="?page={{ article_post.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in article_post.paginator.page_range %}
+              {% if article_post.number == i %}
+                <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li><a href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if article_post.has_next %}
+              <li><a href="?page={{ article_post.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+<!--    {% for i in paginator.page_range %}-->
+<!--        <li class="page-item {% if i == page_number %} active {% endif %}">-->
+<!--            <a class="page-link" href="?page={{ i }}">{{i}}</a>-->
+<!--        </li>-->
+<!--    {% endfor %}-->
+      </ul>
+  </nav>
+
+
+
+<!--	 <div class="pagination">-->
+<!--    <span class="step-links">-->
+<!--        {% if article_post.has_previous %}-->
+<!--            <a href="?page=1">&laquo; first</a>-->
+<!--            <a href="?page={{ article_post.previous_page_number }}">previous</a>-->
+<!--        {% endif %}-->
+
+<!--        <span class="current">-->
+<!--            Page {{ article_post.number }} of {{ article_post.paginator.num_pages }}.-->
+<!--        </span>-->
+
+<!--        {% if article_post.has_next %}-->
+<!--            <a href="?page={{ article_post.next_page_number }}">next</a>-->
+<!--            <a href="?page={{ article_post.paginator.num_pages }}">last &raquo;</a>-->
+<!--        {% endif %}-->
+<!--    </span>-->
+<!--</div>-->
+
+ </div>
+
+{% endblock content %}
+
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer %}
+
+
+
+{% block script %}
+
+{% endblock %}

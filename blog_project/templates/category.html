@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} welcome to your sample {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+<style>
+    h4.well {
+    margin-top: 200px;
+}
+
+.row h3 a{
+    color: #151513;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: system-ui;
+    letter-spacing: 0.1rem;
+    padding-bottom: 5px;
+    text-transform: capitalize;
+    text-align: justify;
+    text-decoration: none;
+
+
+      }
+.row h3 a:hover{
+    color: green;
+}
+
+
+.row h4 a{
+   color: #333331;
+    font-size: 15px;
+    letter-spacing: 0.1rem;
+    text-align: justify;
+    text-transform: capitalize;
+    text-decoration: none;
+
+    }
+.row h4 a:hover{
+    color: green;
+
+}
+
+.row button a{
+color:black;
+text-decoration: none;
+
+}
+.thumbnail a{
+    color: black;
+    margin-top: 20px;
+    margin-bottom: none;
+    padding-bottom: 0px;
+    text-transform: capitalize;
+    text-decoration: none;
+
+    }
+
+.thumbnail a:hover{
+    color: green;
+
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active {
+    background: #18e86b !important;
+    border-color: #0df194 !important;
+}
+#fh5co-offcanvas .fh5co-menu, #fh5co-offcanvas .fh5co-bio {
+    width: 400px;
+    padding: 10px;
+}
+
+
+.thumbnail > img, .thumbnail a > img:hover {
+ opacity: 0.5;
+   transform: scaleX(-1);
+
+ }
+</style>
+{% endblock %}
+
+
+
+{% block profile %}
+{% endblock %}
+
+
+
+{% block content %}
+ <div class="container">
+	     <h4 class="well"> Category : {{ cat.name }}</h4>
+   </div>
+
+<div class="container">
+          <div class="row">
+               {% for p in post %}
+                 <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+            <a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" style="width:251px; height:200px;" alt="Image" class="img-responsive"></a>
+                  <div class="caption">
+                      <span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> category : {{p.category.name}} </a></span>
+				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title }}</a></h3>
+                      <h4  class="card-subtitle mb-2 text-muted"><a href="{% url 'author' name=p.article_author.name.username %}"> Author: {{ p.article_author.name }} </a> </h4>
+
+                        <button class="btn btn-success"> <a href="{% url 'single_page' id=p.id %}"  role="button">Viwe</a></button>
+                  </div>
+                </div>
+              </div>
+
+          {% endfor %}
+</div>
+</div>
+
+
+
+
+ <div class="container">
+  <nav>
+      <ul class="pagination">
+    {% for i in paginator.page_range %}
+        <li class="page-item {% if i == page_number %} active {% endif %}">
+            <a class="page-link" href="?page={{ i }}">{{i}}</a>
+        </li>
+    {% endfor %}
+      </ul>
+  </nav>
+
+ </div>
+{% endblock content %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer%}
+
+
+{% block script %}
+
+{% endblock %}
+

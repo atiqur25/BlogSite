@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} welcome to your sample {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+{% endblock %}
+
+
+
+{% block profile %}
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container text-center">
+    <form action="{% url 'createCategory' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success "> Add Category  </button>
+    </form>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer%}
+
+
+{% block script %}
+
+{% endblock %}
+

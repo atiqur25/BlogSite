@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} welcome to create page {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+{% endblock %}
+
+
+
+{% block profile %}
+{% endblock %}
+
+
+
+{% block content %}
+ <div class="container_fluid">
+      <div class="row">
+
+          <div class="col-md-6 col-md-offset-3">
+              <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title text-center"> Create your post  </h3>
+                      </div>
+                      <div class="panel-body">
+
+<!--                    {% if messages %}-->
+<!--                        <div class="messages">-->
+<!--                            {% for message in messages %}-->
+<!--                            <div {% if message.tags %} class="{{ message.tags }}"{% endif %} > {{ message }} </div>-->
+<!--                            {% endfor %}-->
+<!--                        </div>-->
+<!--                    {% endif %}-->
+
+<!--                           # ei khane model er  link dile proble hoiteche tai deini-->
+                       <form action=" " method="POST" enctype="multipart/form-data">
+                         {% csrf_token %}
+                           {{ form.media }}
+                           {{ form.as_p }}
+                            <input type="submit" value="Submit" class="btn btn-success">
+                        </form>
+                      </div>
+                </div>
+
+          </div>
+
+      </div>
+
+  </div>
+
+{% endblock %}
+
+
+
+{% block footer %}
+{% include 'footer.html' %}
+
+{% endblock footer%}
+
+
+{% block script %}
+
+{% endblock %}
+

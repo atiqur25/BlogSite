@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} welcome to your sample {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+{% endblock %}
+
+
+
+{% block profile %}
+{% endblock %}
+
+
+
+{% block content %}
+<h1 class="text-center"> Search resul list </h1>
+
+{% for p in article_post %}
+				<article class="col-lg-3 col-md-3 col-sm-3 col-xs-6 col-xxs-12 animate-box">
+						<figure>
+							<a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" alt="Image" class="img-responsive"></a>
+						</figure>
+						<span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> {{p.category.name}} </a></span>
+						<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title }}</a></h3>
+				   <h6  class="card-subtitle mb-2 text-muted"><a href="{% url 'author' name=p.article_author.name.username %}"> Author: {{ p.article_author.name }} </a> </h6>
+						<span class="fh5co-meta fh5co-date">{{ p.time_posted }}</span>
+			   </article>
+			  <div class="clearfix visible-xs-block"></div>
+		{% endfor %}
+
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer%}
+
+
+{% block script %}
+
+{% endblock %}
+

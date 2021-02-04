@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} welcome to your sample {% endblock %}
+
+{% block stylesheet %}
+ <!-- oi khane css or style likhbo -->
+{% endblock %}
+
+
+
+{% block profile %}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_staff  or request.user.is_superuser %}
+        <a href="{% url 'createCategory' %}" class="btn btn-success pull pull-right">Create new Category </a>
+    {% endif %}
+    {% endif %}
+
+    <table class="table table-striped text-center">
+        <thead>
+           <tr>
+               <td> Category </td>
+
+            {% if request.user.is_authenticated %}
+            {% if request.user.is_staff  or request.user.is_superuser %}
+             <td> Action </td>
+              {% endif %}
+            {% endif %}
+
+           </tr>
+        </thead>
+
+        <tbody>
+            {% for p in all_category %}
+            <tr>
+                   <td> <a href="{% url 'category_page' name=p.name %}">  {{p.name}}  </a></td>
+                   <td>
+
+                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff  or request.user.is_superuser %}
+                       <a href="{% url 'DeletedCategory' id=p.id %}" class="btn btn-primary btn-sm "> Delete </a> <a href="{% url 'UpdateCategory' id=p.id %}" class="btn btn-primary btn-sm"> Edit</a>
+
+                      {% endif %}
+                    {% endif %}
+                   </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+   </table>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+{% include 'footer.html' %}
+{% endblock footer%}
+
+
+{% block script %}
+
+{% endblock %}
+
