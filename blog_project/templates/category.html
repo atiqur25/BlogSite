@@ -99,7 +99,7 @@ text-decoration: none;
             <a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" style="width:251px; height:200px;" alt="Image" class="img-responsive"></a>
                   <div class="caption">
                       <span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> category : {{p.category.name}} </a></span>
-				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title }}</a></h3>
+				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title|slice:"15"  }}</a></h3>
                       <h4  class="card-subtitle mb-2 text-muted"><a href="{% url 'author' name=p.article_author.name.username %}"> Author: {{ p.article_author.name }} </a> </h4>
 
                         <button class="btn btn-success"> <a href="{% url 'single_page' id=p.id %}"  role="button">Viwe</a></button>
@@ -115,7 +115,7 @@ text-decoration: none;
 
 
  <div class="container">
-  <nav>
+      <nav>
       <ul class="pagination">
     {% for i in paginator.page_range %}
         <li class="page-item {% if i == page_number %} active {% endif %}">

@@ -69,11 +69,11 @@ color:black;
 	<!-- END #fh5co-header -->
 	<div class="container">
 
-		{% if single_post.id > first.id %}
-	      <a href="{% url 'single_page' id=single_post.id|add:'-1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
-		{% endif %}
 		{% if single_post.id < last.id %}
-	       <a href="{% url 'single_page' id=single_post.id|add:'1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
+	      <a href="{% url 'single_page' id=single_post.id|add:'1' %}" class="fh5co-post-prev"><span><i class="icon-chevron-left"></i> Prev</span></a>
+		{% endif %}
+		{% if single_post.id > first.id %}
+	       <a href="{% url 'single_page' id=single_post.id|add:'-1' %}" class="fh5co-post-next"><span>Next <i class="icon-chevron-right"></i></span></a>
 		{% endif %}
 
 
@@ -134,11 +134,11 @@ color:black;
 			<h3 class="well"> Related article</h3>
 			<div class="row">
 				{% for r in ralated_post %}
-				 <div class="col-sm-6 col-md-3">
+				 <div class="col-sm-6 col-md-3" style="height:433px;">
 						<div class="thumbnail">
 					<a href="{% url 'single_page' id=r.id %}"><img src="{{ r.image.url }}" style="width:329px; height:270px;" alt="Image" class="img-responsive"></a>
 						  <div class="caption">
-						<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=r.id %}">{{ r.title }}</a></h3>
+						<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=r.id %}">{{ r.title|slice:"15" }} ...</a></h3>
                         <button class="btn btn-success"> <a href="{% url 'single_page' id=r.id %}"  role="button">Viwe</a></button>
 						  </div>
 						</div>

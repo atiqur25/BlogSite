@@ -98,7 +98,7 @@ color:black;
             <a href="{% url 'single_page' id=p.id %}"><img src="{{ p.image.url }}" style="width:329px; height:270px;" alt="Image" class="img-responsive"></a>
                   <div class="caption">
                       <span class="fh5co-meta"><a href="{% url 'category_page' name=p.category.name %}"> category : {{p.category.name}} </a></span>
-				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title }}</a></h3>
+				<h3 class="fh5co-article-title"><a href="{% url 'single_page' id=p.id %}">{{ p.title|slice:"15"}}..</a></h3>
 					  <span class="fh5co-meta fh5co-date"> {{ p.time_posted }} </span>
                         <button class="btn btn-success"> <a href="{% url 'single_page' id=p.id %}"  role="button">Viwe</a></button>
                   </div>
